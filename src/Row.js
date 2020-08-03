@@ -4,6 +4,8 @@ import React, { useState, useEffect } from "react";
 import axios from "./axios";
 import requests from "./requests";
 import "./Row.css";
+import YouTube from "react-youtube";
+import movieTrailer from "movie-trailer";
 
 const base_url = "https://image.tmdb.org/t/p/original";
 
@@ -12,6 +14,7 @@ function Row({ title, fetchUrl, isLargeRow }) {
   /* State, how you write react variables */
   // Empty array of movies
   const [movies, setMovies] = useState([]);
+  const [trailerUrl, setTrailerUrl] = useState("");
 
   // Snippet of code which runs on a specific condition/variable
   // When row loads, make a request to TMDb
@@ -33,6 +36,27 @@ function Row({ title, fetchUrl, isLargeRow }) {
 
   console.log(movies);
 
+  const opts = {
+    height: "390",
+    width: "100%",
+    playerVars: {
+      autoplay: 1,
+    },
+  };
+
+  const handleClick = (movie) => {
+    if (trailerUrl) {
+      setTrailerUrl("");
+    } else {
+      movieTrailer(movie?.name || "")
+        .then((url) => {
+          const urlParams = new URLSearchParams(new URL(url).search);
+          setTrailerUrl(urlParams.get("v"));
+        })
+        .catch((error) => console.log(error));
+    }
+  };
+
   return (
     <div className="row">
       {/* Title */}
@@ -45,6 +69,7 @@ function Row({ title, fetchUrl, isLargeRow }) {
           <img
             /* So that we are efficiently rendering movies */
             key={movie.id}
+            onClick={() => handleClick(movie)}
             /* Every row is a row__poster but if it is a large row then it is also row__posterLarge */
             className={`row__poster ${isLargeRow && "row__posterLarge"}`}
             src={`${base_url}${
@@ -55,6 +80,8 @@ function Row({ title, fetchUrl, isLargeRow }) {
           />
         ))}
       </div>
+      {/* When you have a trailer url */}
+      {trailerUrl && <YouTube videoId={trailerUrl} opts={opts} />}
     </div>
   );
 }
