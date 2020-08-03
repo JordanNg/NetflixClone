@@ -1,0 +1,43 @@
+.row {
+  margin-left: 20px;
+  color: white;
+}
+
+.row__container {
+  /* Used to put things all on the same row */
+  display: flex;
+  /* Hide the vertical overflow */
+  overflow-y: hidden;
+  /* add a scrollbar for the x overflow */
+  overflow-x: scroll;
+
+  /* So hover growth does not get cropped by hidding the y overflow*/
+  padding: 20px;
+}
+
+/* Tells browsers to never display scroll bars */
+.row__container::-webkit-scrollbar {
+  display: none;
+}
+
+.row__poster {
+  object-fit: contain;
+  width: 100%;
+  max-height: 125px;
+  margin-right: 10px;
+  /* whenever there is a change in size, do it over the course of 450ms*/
+  transition: transform 450ms;
+}
+
+/* On a hover expand what you are hovering over */
+.row__poster:hover {
+  transform: scale(1.08);
+}
+
+.row__posterLarge {
+  max-height: 300px;
+}
+
+.row__posterLarge:hover {
+  transform: scale(1.1);
+}
