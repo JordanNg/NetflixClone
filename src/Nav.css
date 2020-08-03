@@ -1,0 +1,40 @@
+.nav {
+  /* Fixed to the top of the screen */
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 20px;
+
+  height: 40px;
+
+  /* Flexbox to put items on same line*/
+  display: flex;
+
+  /* put the items spaced evenly */
+  justify-content: space-between;
+
+  z-index: 1;
+
+  transition-timing-function: ease-in;
+  transition: all 450ms;
+}
+
+.nav__black {
+  background-color: #111;
+}
+
+.nav__logo {
+  position: fixed;
+  left: 20px;
+  width: 125px;
+
+  /* So the aspect ratio is always saved */
+  object-fit: contain;
+}
+
+.nav__avatar {
+  position: fixed;
+  right: 20px;
+  width: 40px;
+  object-fit: contain;
+}

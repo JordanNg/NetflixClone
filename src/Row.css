@@ -13,6 +13,7 @@
 
   /* So hover growth does not get cropped by hidding the y overflow*/
   padding: 20px;
+  margin-right: 20px;
 }
 
 /* Tells browsers to never display scroll bars */
@@ -39,5 +40,5 @@
 }
 
 .row__posterLarge:hover {
-  transform: scale(1.1);
+  transform: scale(1.09);
 }
